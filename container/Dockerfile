@@ -25,11 +25,11 @@ ARG SEARXNG_GIT_VERSION="unspecified"
 ARG LABEL_VCS_REF="unspecified"
 ARG LABEL_VCS_URL="unspecified"
 
-COPY --chown=searxng:searxng --from=builder /usr/local/searxng/venv/ ./venv/
-COPY --chown=searxng:searxng --from=builder /usr/local/searxng/searx/ ./searx/
-COPY --chown=searxng:searxng ./searx/settings.yml ./searx/settings.yml  # ✅ Ensure settings.yml is explicitly present
-COPY --chown=searxng:searxng ./container/template/ ./.template/
-COPY --chown=searxng:searxng ./container/entrypoint.sh ./entrypoint.sh
+COPY --chown=searxng:searxng --from=builder /usr/local/searxng/venv/ /usr/local/searxng/venv/
+COPY --chown=searxng:searxng --from=builder /usr/local/searxng/searx/ /usr/local/searxng/searx/
+COPY --chown=searxng:searxng ./searx/settings.yml /usr/local/searxng/searx/settings.yml  # ✅ Ensure settings.yml lands in the right path
+COPY --chown=searxng:searxng ./container/template/ /usr/local/searxng/.template/
+COPY --chown=searxng:searxng ./container/entrypoint.sh /usr/local/searxng/entrypoint.sh
 
 LABEL org.opencontainers.image.authors="searxng <$GIT_URL>" \
       org.opencontainers.image.created="$LABEL_DATE" \
@@ -43,7 +43,7 @@ LABEL org.opencontainers.image.authors="searxng <$GIT_URL>" \
       org.opencontainers.image.version="$SEARXNG_GIT_VERSION"
 
 ENV SEARXNG_VERSION="$SEARXNG_GIT_VERSION" \
-    SEARXNG_SETTINGS_PATH="$CONFIG_PATH/settings.yml" \
+    SEARXNG_SETTINGS_PATH="/usr/local/searxng/searx/settings.yml" \
     GRANIAN_PROCESS_NAME="searxng" \
     GRANIAN_INTERFACE="wsgi" \
     GRANIAN_HOST="::" \
