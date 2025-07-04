@@ -2,7 +2,7 @@ FROM ghcr.io/searxng/base:searxng-builder AS builder
 
 COPY ./requirements.txt ./requirements.txt
 
-RUN --mount=type=cache,id=pip,target=/root/.cache/pip python -m venv ./venv \
+RUN --mount=type=cache,id=cache-pip,target=/root/.cache/pip python -m venv ./venv \
  && . ./venv/bin/activate \
  && pip install -r requirements.txt \
  && pip install "granian~=2.0"
@@ -54,7 +54,6 @@ ENV SEARXNG_VERSION="$SEARXNG_GIT_VERSION" \
     GRANIAN_BLOCKING_THREADS_IDLE_TIMEOUT="300" \
     GRANIAN_STATIC_PATH_MOUNT="/usr/local/searxng/searx/static/" \
     GRANIAN_STATIC_PATH_EXPIRES="3600"
-
 
 EXPOSE 8080
 
