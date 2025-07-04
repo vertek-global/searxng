@@ -2,10 +2,10 @@ FROM ghcr.io/searxng/base:searxng-builder AS builder
 
 COPY ./requirements.txt ./requirements.txt
 
-RUN --mount=type=cache,id=searxng-pip-cache,target=/root/.cache/pip python -m venv ./venv \
+RUN python -m venv ./venv \
  && . ./venv/bin/activate \
- && pip install -r requirements.txt \
- && pip install "granian~=2.0"
+ && pip install --no-cache-dir -r requirements.txt \
+ && pip install --no-cache-dir "granian~=2.0"
 
 COPY ./searx/ ./searx/
 
