@@ -27,7 +27,7 @@ ARG LABEL_VCS_URL="unspecified"
 
 COPY --chown=searxng:searxng --from=builder /usr/local/searxng/venv/ /usr/local/searxng/venv/
 COPY --chown=searxng:searxng --from=builder /usr/local/searxng/searx/ /usr/local/searxng/searx/
-COPY --chown=searxng:searxng ./searx/settings.yml /usr/local/searxng/searx/settings.yml  # ✅ Ensure settings.yml lands in the right path
+COPY --chown=searxng:searxng ./searx/settings.yml /usr/local/searxng/searx/settings.yml
 COPY --chown=searxng:searxng ./container/template/ /usr/local/searxng/.template/
 COPY --chown=searxng:searxng ./container/entrypoint.sh /usr/local/searxng/entrypoint.sh
 
