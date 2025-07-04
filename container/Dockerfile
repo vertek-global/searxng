@@ -2,7 +2,7 @@ FROM ghcr.io/searxng/base:searxng-builder AS builder
 
 COPY ./requirements.txt ./requirements.txt
 
-RUN --mount=type=cache,id=cache-pip,target=/root/.cache/pip python -m venv ./venv \
+RUN --mount=type=cache,id=searxng-pip-cache,target=/root/.cache/pip python -m venv ./venv \
  && . ./venv/bin/activate \
  && pip install -r requirements.txt \
  && pip install "granian~=2.0"
