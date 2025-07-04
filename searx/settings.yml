@@ -77,6 +77,9 @@ search:
   # formats: [html, csv, json, rss]
   formats:
     - html
+    - json
+    - rss
+    - csv
 
 server:
   # Is overwritten by ${SEARXNG_PORT} and ${SEARXNG_BIND_ADDRESS}
